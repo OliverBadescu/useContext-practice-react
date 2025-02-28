@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { PlayerContext } from "../../service/state/PlayerContext";
 
 
 export default function Header(){
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
+
+    const{players} = useContext(PlayerContext);
+
+    let sum = 0;
+
+    players.map((pl) => sum += pl.score)
 
     useEffect(()=>{
 
@@ -34,8 +42,8 @@ export default function Header(){
         
         <header>
                 <div className="score">
-                    <p>Total players: </p>
-                    <p>Total points: </p>
+                    <p>Total players: {players.length} </p>
+                    <p>Total points: {sum}</p>
                 </div>
                     <h1>SCOREBOARD</h1>
                 <div className="stopwatch">
